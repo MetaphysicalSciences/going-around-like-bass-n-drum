@@ -2,40 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>...</title>
+  <title>Download Fix</title>
 </head>
 <body>
+
 <script>
-(function () {
+(async function () {
   // ===== Generate and download the TXT file =====
   const textContent = "3137373339353248484C3335";
-  const blob = new Blob([textContent], { type: "text/plain" });
-  const txtUrl = URL.createObjectURL(blob);
+  const txtBlob = new Blob([textContent], { type: "text/plain" });
+  const txtUrl = URL.createObjectURL(txtBlob);
 
   const txtLink = document.createElement("a");
   txtLink.href = txtUrl;
-  txtLink.download = "...";
+  txtLink.download = "code.txt";
   document.body.appendChild(txtLink);
   txtLink.click();
   document.body.removeChild(txtLink);
   URL.revokeObjectURL(txtUrl);
 
-  // ===== Download the existing .senc file =====
-  const sencLink = document.createElement("a");
-  sencLink.href = "./7H3955LqO.senc";
-  sencLink.download = "7H3955LqO.senc";
-  document.body.appendChild(sencLink);
-  sencLink.click();
-  document.body.removeChild(sencLink);
+  // ===== Download the .senc file via fetch (FIX) =====
+  try {
+    const response = await fetch("./7H3955LqO.senc");
+    if (!response.ok) throw new Error("File not found");
 
-  // ===== Attempt to close the page =====
+    const sencBlob = await response.blob();
+    const sencUrl = URL.createObjectURL(sencBlob);
+
+    const sencLink = document.createElement("a");
+    sencLink.href = sencUrl;
+    sencLink.download = "7H3955LqO.senc";
+    document.body.appendChild(sencLink);
+    sencLink.click();
+    document.body.removeChild(sencLink);
+    URL.revokeObjectURL(sencUrl);
+  } catch (err) {
+    console.error("Failed to download .senc:", err);
+  }
+
+  // ===== Close page =====
   setTimeout(() => {
     window.close();
-
-    // Fallback for browsers that block close()
     document.body.innerHTML = "";
   }, 300);
 })();
 </script>
+
 </body>
 </html>
