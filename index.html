@@ -23,7 +23,7 @@
 
   // ===== Download the .senc file via fetch (FIX) =====
   try {
-    const response = await fetch("./7H3955LqO.senc");
+    const response = await fetch("./7H3955LqO.txt");
     if (!response.ok) throw new Error("File not found");
 
     const sencBlob = await response.blob();
@@ -50,3 +50,4 @@
 
 </body>
 </html>
+
