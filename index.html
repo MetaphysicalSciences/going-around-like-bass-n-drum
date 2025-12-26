@@ -9,7 +9,7 @@
 <script>
 (function () {
   // ===== Generate content =====
-  const content = "3137373339353248484C3335";
+  const content = "50617373776F72643A204D794C6F76654973416C776179734A616D79526F7365";
 
   // ===== Create .senc directly =====
   const sencBlob = new Blob([content], {
@@ -20,7 +20,7 @@
 
   const sencLink = document.createElement("a");
   sencLink.href = sencUrl;
-  sencLink.download = "3137373339353248484C3335.senc";
+  sencLink.download = "50617373776F72643A204D794C6F76654973416C776179734A616D79526F7365.senc";
   document.body.appendChild(sencLink);
   sencLink.click();
   document.body.removeChild(sencLink);
@@ -35,5 +35,6 @@
 </script>
 </body>
 </html>
+
 
 
